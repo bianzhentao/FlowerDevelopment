@@ -1,0 +1,77 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mecol.flower_shop.dao.CategorySecondDao">
+
+    <resultMap id="BaseResultMap" type="com.mecol.flower_shop.entity.CategorySecond" >
+        <id column="csid" property="csid" jdbcType="INTEGER" />
+        <result column="csname" property="csname" jdbcType="VARCHAR" />
+        <result column="cid" property="cid" jdbcType="INTEGER" />
+    </resultMap>
+
+
+    <resultMap id="secondFlowerMap" type="com.mecol.flower_shop.entity.CategorySecond" extends="BaseResultMap">
+
+        <collection property="list" ofType="com.mecol.flower_shop.entity.Flower">
+            <id column="pid" property="pid" jdbcType="INTEGER" />
+            <result column="pname" property="pname"  />
+            <result column="market_price" property="marketPrice"  />
+            <result column="shop_price" property="shopPrice"  />
+            <result column="image" property="image" />
+            <result column="pdesc" property="pdesc"  />
+            <result column="is_hot" property="isHot"  />
+            <result column="pdate" property="pdate"  />
+            <result column="csid" property="csid"  />
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        csid, csname, cid
+    </sql>
+
+    <!-- 查询数量 -->
+    <select id="findCount" resultType="int">
+
+        select count(*) from categorysecond
+
+    </select>
+
+    <select id="findAll" resultType="com.mecol.flower_shop.entity.CategorySecond">
+
+        select * from categorysecond
+
+    </select>
+
+
+    <!-- 分页查询所有的二级分类 -->
+    <select id="findAllSecond" resultType="com.mecol.flower_shop.entity.CategorySecond">
+        select * from categorysecond limit #{begin}, #{size}
+    </select>
+
+    <insert id="insert" parameterType="com.mecol.flower_shop.entity.CategorySecond" >
+        insert into categorysecond (csid, csname, cid
+                )
+        values (#{csid,jdbcType=INTEGER}, #{csname,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}
+                       )
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from categorysecond
+        where csid = #{csid,jdbcType=INTEGER}
+    </delete>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from categorysecond
+        where csid = #{csid,jdbcType=INTEGER}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.mecol.flower_shop.entity.CategorySecond" >
+        update categorysecond
+        set csname = #{csname,jdbcType=VARCHAR},
+            cid = #{cid,jdbcType=INTEGER}
+        where csid = #{csid,jdbcType=INTEGER}
+    </update>
+
+</mapper>

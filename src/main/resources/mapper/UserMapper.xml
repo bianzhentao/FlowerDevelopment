@@ -1,0 +1,78 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mecol.flower_shop.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.mecol.flower_shop.entity.User" >
+        <id column="uid" property="uid" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="addr" property="addr" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <insert id="insert" parameterType="com.mecol.flower_shop.entity.User" >
+        insert into user (uid, username, password,
+                          name, email, phone,
+                          addr, state, code)
+        values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+                #{addr,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="delete" >
+        delete from user where uid=#{uid}
+    </delete>
+
+    <!--查询所有订单数量  -->
+    <select id="findCount" parameterType="int" resultType ="int">
+        select count(*) from user
+    </select>
+
+    <!-- 根据用户id查找对应的订单 -->
+    <select id="findUserPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+
+        select * from user
+
+        LIMIT #{begin,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </select>
+
+
+
+
+
+    <!-- 用户登录 -->
+    <select id="login" parameterType="com.mecol.flower_shop.entity.User"
+            resultType="com.mecol.flower_shop.entity.User">
+
+        select * from user where username = #{username,jdbcType=VARCHAR}
+                             and password = #{password,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByUserName" resultType="com.mecol.flower_shop.entity.User">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="findByUid" resultType="com.mecol.flower_shop.entity.User">
+        select * from user where uid=#{uid}
+    </select>
+
+    <update id="updateUser" parameterType="com.mecol.flower_shop.entity.User">
+        update user
+        set username = #{username,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            phone = #{phone,jdbcType=VARCHAR},
+            addr = #{addr,jdbcType=VARCHAR},
+            state = #{state,jdbcType=INTEGER},
+            code = #{code,jdbcType=VARCHAR}
+        where uid = #{uid,jdbcType=INTEGER}
+
+    </update>
+
+</mapper>

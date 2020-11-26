@@ -1,0 +1,138 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mecol.flower_shop.dao.FlowerDao">
+    <resultMap id="BaseResultMap" type="com.mecol.flower_shop.entity.Flower" >
+        <id column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="pname" property="pname" jdbcType="VARCHAR" />
+        <result column="market_price" property="marketPrice" jdbcType="DOUBLE" />
+        <result column="shop_price" property="shopPrice" jdbcType="DOUBLE" />
+        <result column="image" property="image" jdbcType="VARCHAR" />
+        <result column="pdesc" property="pdesc" jdbcType="VARCHAR" />
+        <result column="is_hot" property="isHot" jdbcType="INTEGER" />
+        <result column="pdate" property="pdate" jdbcType="TIMESTAMP" />
+        <result column="csid" property="csid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        pid, pname, market_price, shop_price, image, pdesc, is_hot, pdate, csid
+    </sql>
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from flower
+        where pid = #{pid,jdbcType=INTEGER}
+    </select>
+
+    <!-- 查询商品是否热门 -->
+    <select id="isHot" parameterType="int" resultType="com.mecol.flower_shop.entity.Flower">
+
+        select pid,pname,market_price AS marketPrice,
+        shop_price AS shopPrice,
+        image,pdesc,
+        is_hot AS isHot,
+        pdate,csid from flower  where is_hot =#{isHot}
+    </select>
+
+    <!-- 查询是否是最新商品 -->
+    <select id="isNew" parameterType="com.mecol.flower_shop.entity.Flower" resultType="com.mecol.flower_shop.entity.Flower">
+        select pid,pname,market_price AS marketPrice,
+               shop_price AS shopPrice,
+               image,pdesc,
+               is_hot AS isHot,
+               pdate,csid from flower order by pdate desc
+    </select>
+
+    <!-- 根据搜索框查询商品数量 注意传过来的csname是花名-->
+    <select id="findCount3"  resultType="int" >
+        select count(*) from flower,categorysecond
+        where categorysecond.csid=flower.csid
+          and flower.pname like concat(concat("%",#{csname}),"%")
+    </select>
+    <!--首页根据搜索框搜索鲜花  -->
+    <select id="findAllByCsName" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * from flower,categorysecond
+        where flower.csid = categorysecond.csid
+          AND  flower.pname like concat(concat("%",#{csname}),"%")
+        ORDER BY pdate DESC LIMIT #{begin,jdbcType=INTEGER}, #{size,jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据一级商品查询商品数量 -->
+    <select id="findCount1" parameterType="int" resultType="int">
+        select count(*) from flower,category,categorysecond
+        where category.cid=categorysecond.cid
+          and  categorysecond.csid=flower.csid
+          and category.cid =#{cid}
+
+    </select>
+    <!-- 前台根据一级分类id分页查询商品 -->
+    <select id="findByPageCid" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT flower.* FROM flower,category,categorysecond
+        WHERE category.cid = categorysecond.cid
+          AND categorysecond.csid = flower.csid
+          AND category.cid =#{cid}
+        ORDER BY pdate DESC LIMIT #{begin,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </select>
+
+    <select id="findFlower"  resultType="com.mecol.flower_shop.entity.echarts">
+        SELECT pname ,shop_price  from flower
+    </select>
+
+    <!-- 根据二级商品查询商品数量 -->
+    <select id="adminCount" resultType="int">
+        select count(*) from flower
+    </select>
+
+    <select id="findAll"  resultMap="BaseResultMap">
+        select * from flower order by pdate desc limit #{begin}, #{size}
+    </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.mecol.flower_shop.entity.Flower" >
+        update flower
+        <set >
+            <if test="pname != null" >
+                pname = #{pname,jdbcType=VARCHAR},
+            </if>
+            <if test="marketPrice != null" >
+                market_price = #{marketPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="shopPrice != null" >
+                shop_price = #{shopPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="image != null" >
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="pdesc != null" >
+                pdesc = #{pdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="isHot != null" >
+                is_hot = #{isHot,jdbcType=INTEGER},
+            </if>
+            <if test="pdate != null" >
+                pdate = #{pdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="csid != null" >
+                csid = #{csid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where pid = #{pid,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from flower
+        where pid = #{pid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.mecol.flower_shop.entity.Flower" >
+        insert into flower (pid, pname, market_price,
+                            shop_price, image, pdesc,
+                            is_hot, pdate, csid
+                )
+        values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{marketPrice,jdbcType=DOUBLE},
+                #{shopPrice,jdbcType=DOUBLE}, #{image,jdbcType=VARCHAR}, #{pdesc,jdbcType=VARCHAR},
+                #{isHot,jdbcType=INTEGER}, #{pdate,jdbcType=TIMESTAMP}, #{csid,jdbcType=INTEGER}
+                       )
+    </insert>
+
+
+</mapper>

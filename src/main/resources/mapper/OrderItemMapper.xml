@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mecol.flower_shop.dao.OrderItemDao">
+    <resultMap id="BaseResultMap" type="com.mecol.flower_shop.entity.OrderItem" >
+        <id column="itemid" property="itemid" jdbcType="INTEGER" />
+        <result column="count" property="count" jdbcType="INTEGER" />
+        <result column="subtotal" property="subtotal" jdbcType="DOUBLE" />
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="oid" property="oid" jdbcType="INTEGER" />
+
+        <association property="product" column="pid"
+                     select="com.mecol.flower_shop.dao.FlowerDao.findById" ></association>
+
+    </resultMap>
+    <sql id="Base_Column_List" >
+        itemid, count, subtotal, pid, oid
+    </sql>
+
+    <insert id="insert" parameterType="com.mecol.flower_shop.entity.OrderItem" >
+        insert into orderitem (itemid, count, subtotal,
+                               pid, oid)
+        values (#{itemid,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, #{subtotal,jdbcType=DOUBLE},
+                #{pid,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER})
+    </insert>
+
+    <!--根据订单的id查询订单项: -->
+    <select id="findOrderItem" parameterType="int" resultMap="BaseResultMap">
+        select * from orderitem  where oid = #{oid,jdbcType=INTEGER}
+    </select>
+
+
+</mapper>

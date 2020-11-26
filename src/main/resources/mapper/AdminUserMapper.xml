@@ -1,0 +1,57 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mecol.flower_shop.dao.AdminUserDao">
+    <resultMap id="BaseResultMap" type="com.mecol.flower_shop.entity.AdminUser" >
+        <id column="uid" property="uid" jdbcType="INTEGER" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 后台登录用户 -->
+    <select id="adminLogin" parameterType="com.mecol.flower_shop.entity.AdminUser" resultType="com.mecol.flower_shop.entity.AdminUser">
+
+        select * from adminuser where username = #{username,jdbcType=VARCHAR}  AND
+                                      password=#{password,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByUid" resultType="com.mecol.flower_shop.entity.AdminUser">
+        select * from adminuser where uid=#{uid}
+    </select>
+
+    <update id="updateByPrimaryKey" parameterType="com.mecol.flower_shop.entity.AdminUser" >
+        update adminuser
+        set username = #{username,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR}
+        where uid = #{uid,jdbcType=INTEGER}
+    </update>
+
+
+    <insert id="add" parameterType="com.mecol.flower_shop.entity.AdminUser" >
+        insert into adminuser (uid, username, password
+                )
+        values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}
+                       )
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from adminuser
+        where uid = #{uid,jdbcType=INTEGER}
+    </delete>
+
+
+    <!--查询所有订单数量  -->
+    <select id="findCountAll" parameterType="int" resultType ="int">
+        select count(*) from adminuser
+    </select>
+
+    <!-- 根据用户id查找对应的订单 -->
+    <select id="findOrderPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+
+        select * from adminuser
+
+        LIMIT #{begin,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </select>
+
+
+</mapper>
