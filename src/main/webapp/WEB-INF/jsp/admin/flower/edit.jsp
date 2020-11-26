@@ -60,7 +60,7 @@
             <div class="am-form-group am-cf">
                 <div class="zuo">产品图片：</div>
                 <div class="you" style="height: 45px;">
-                    <img width="40" height="45" src="${ pageContext.request.contextPath }/${flower.image}"/>
+                    <img width="40" height="45" src="${pageContext.request.contextPath}/${flower.image}"/>
                     <input type="file" name="upload"/>
                 </div>
             </div>

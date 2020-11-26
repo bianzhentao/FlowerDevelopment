@@ -9,6 +9,7 @@ import com.mecol.flower_shop.service.CategoryService;
 import com.mecol.flower_shop.service.FlowerService;
 import com.mecol.flower_shop.util.PageBean;
 import com.mecol.flower_shop.util.WebUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/admin/adminFlowerController")
@@ -53,10 +57,27 @@ public class AdminFlowerController {
 
 
     @RequestMapping("/add")
-    public String add(Flower flower, HttpServletRequest request,
+    public String add(Flower flower, HttpServletRequest request,HttpSession session,
                       @RequestParam(value = "upload", required = false) MultipartFile file){
-        String imageAddr = WebUtils.saveFile(request, file);
-        flower.setImage(imageAddr);
+//        String imageAddr = WebUtils.saveFile(request, file);
+//        flower.setImage(imageAddr);
+        //获取上传路径
+        String realPath = session.getServletContext().getRealPath("images/uploadfiles/");
+        //获取原文件名
+        String oldName = file.getOriginalFilename();
+        //获取扩展名
+        String extension = FilenameUtils.getExtension(oldName);//原文件后缀
+        //生成新文件名
+        String newName = System.currentTimeMillis() + new Random().nextInt(1000) + "_upload." + extension;
+        //封装文件对象
+        System.out.println(newName);
+        File files = new File(realPath, newName);
+        try {
+            file.transferTo(files);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        flower.setImage(newName);
         flower.setPdate(new Date());
         flowerService.add(flower);
         return "redirect:list?page=1";

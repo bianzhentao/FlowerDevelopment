@@ -73,7 +73,7 @@
                 <c:forEach items="${pList.list }" var="p" varStatus="status">
                     <tr>
                         <td align="center">${status.index+1 }</td>
-                        <td align="center"><img width="40" height="45" src="${ pageContext.request.contextPath }/${p.image}"/></td>
+                        <td align="center"><img width="40" height="45" src="${ pageContext.request.contextPath }/images/uploadfiles/${p.image}"/></td>
                         <td align="center">${p.pname }</td>
                         <td align="center">${p.shopPrice}</td>
                         <td align="center">
