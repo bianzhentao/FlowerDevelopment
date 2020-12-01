@@ -38,7 +38,7 @@
 
                     <tr>
                         <td width="60">
-                            <img src="${pageContext.request.contextPath}/${cartItem.product.image }"/>
+                            <img src="${pageContext.request.contextPath}/images/uploadfiles/${cartItem.product.image }"/>
                         </td>
                         <td>
                             <a target="_blank">${cartItem.product.pname }</a>

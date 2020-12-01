@@ -99,7 +99,7 @@
 
                     <tr>
                         <td width="60"><img
-                                src="${ pageContext.request.contextPath }/${orderItem.product.image}"/>
+                                src="${ pageContext.request.contextPath }/images/uploadfiles/${orderItem.product.image}"/>
                         </td>
                         <td>${orderItem.product.pname }</td>
                         <td>${orderItem.product.shopPrice }</td>

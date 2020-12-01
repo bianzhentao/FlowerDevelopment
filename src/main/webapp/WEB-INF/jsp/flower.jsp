@@ -48,7 +48,7 @@
                                 <div class="product-img-box col-lg-5 col-sm-6 col-xs-12">
                                     <div class="new-label new-top-left"> New </div>
                                     <div class="product-image">
-                                        <div class="product-full"> <img id="product-zoom" src="${ pageContext.request.contextPath }/${flower.image}" data-zoom-image="${ pageContext.request.contextPath }/${flower.image}" alt="product-image"> </div>
+                                        <div class="product-full"> <img id="product-zoom" src="${ pageContext.request.contextPath }/images/uploadfiles/${flower.image}" data-zoom-image="${ pageContext.request.contextPath }/images/uploadfiles/${flower.image}" alt="product-image"> </div>
                                     </div>
                                     <!-- end: more-images -->
                                 </div>
