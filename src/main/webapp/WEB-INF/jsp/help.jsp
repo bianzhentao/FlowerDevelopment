@@ -18,6 +18,7 @@
   <body style="background: #FF99CC">  
   <title>一分钟挑选鲜花</title>
   <style>body{min-width: 1200px;}#loginModal .btn {margin-top:0px;}</style>
+  </body>
 </head>
 
 <body class="tutorial" data-spy="scroll" data-target=".affix-box">		
@@ -30,7 +31,7 @@
 				<li class="nav-li"><a href="#">数量</a></li>
 				<li class="nav-li"><a href="">颜色</a></li>
 				<li class="nav-li"><a href="">进阶篇</a></li>
-				<!--<li class="gotop"><a href="">回顶部</a></li>-->
+				<li class="gotop"><a href="">回顶部</a></li>
 				<li class="nav-li"><a href="${pageContext.request.contextPath}/main">回首页</a></li>
 			</ul>
 		</div>

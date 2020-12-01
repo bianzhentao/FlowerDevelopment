@@ -36,7 +36,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-xs-12 col-sm-push-3">
-                <!--
+
                 <div class="category-description std">
                     <div class="slider-items-products">
                         <div id="category-desc-slider" class="product-flexslider hidden-buttons">
@@ -47,7 +47,7 @@
                                     <div class="cat-img-title cat-bg cat-box">
                                         <div class="small-tag">Flowers 2018</div>
                                         <h2 class="cat-heading">New special collection</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                                        <p>爱是一种享受，是一种奉献。 </p>
                                     </div>
                                 </div>
 
@@ -57,7 +57,7 @@
                                     <div class="cat-img-title cat-bg cat-box">
                                         <div class="small-tag">Big Sale</div>
                                         <h2 class="cat-heading">Birthday Flowers</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                                        <p>爱是一种享受，是一种奉献。</p>
                                     </div>
 
 
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                -->
+
 
                 <article class="col-main">
                     <h2 class="page-heading"><span class="page-heading-title">鲜花列表：</span></h2>
@@ -81,7 +81,7 @@
                                                                           href="${ pageContext.request.contextPath }/flower/findByPid.action?pid=${p.pid }">
                                                 <img
                                                         alt="Product Title Here"
-                                                        src="${pageContext.request.contextPath}/${p.image }">
+                                                        src="${pageContext.request.contextPath}/images/uploadfiles/${p.image }">
                                             </a>
                                                 <div class="jtv-box-hover">
                                                     <ul class="add-to-links">
@@ -218,7 +218,7 @@
 
             <div class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
                 <aside class="sidebar">
-                    <!--
+
                     <div class="block block-cart">
                         <div class="block-title ">My Cart</div>
                         <div class="block-content">
@@ -270,7 +270,7 @@
                             </ul>
                         </div>
                     </div>
-                    -->
+
                     <div class="custom-slider">
                         <div>
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">

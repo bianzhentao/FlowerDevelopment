@@ -41,10 +41,6 @@
         LIMIT #{begin,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
     </select>
 
-
-
-
-
     <!-- 用户登录 -->
     <select id="login" parameterType="com.mecol.flower_shop.entity.User"
             resultType="com.mecol.flower_shop.entity.User">

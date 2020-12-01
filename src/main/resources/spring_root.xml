@@ -10,39 +10,32 @@
     <contxt:component-scan base-package="com.mecol.flower_shop.service" />
 
     <!--注入数据源-->
-    <!--<context:property-placeholder location="classpath:database.properties"></context:property-placeholder>-->
-    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
-        <!--<property name="username" value="${user}" />-->
-        <!--<property name="password" value="${password}" />-->
+    <contxt:property-placeholder location="classpath:database.properties"></contxt:property-placeholder>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="user" value="${user}" />
+        <property name="password" value="${password}" />
         <!--<property name="minIdle" value="${minIdle}" />-->
         <!--<property name="maxIdle" value="${maxIdle}" />-->
-        <!--<property name="driverClassName" value="${driverClassName}" />-->
-        <!--<property name="url" value="${url}" />-->
+        <property name="driverClass" value="${driverClassName}" />
+        <property name="jdbcUrl" value="${url}" />
         <!--<property name="initialSize" value="${initialSize}" />-->
         <!--<property name="maxActive" value="${maxActive}" />-->
         <!--<property name="maxWait" value="${maxWait}" />-->
         <!--<property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" />-->
         <!--<property name="removeAbandoned" value="${removeAbandoned}" />-->
 
-        <!--&lt;!&ndash; sql 心跳 &ndash;&gt;-->
-        <!--<property name= "testWhileIdle" value="true"/>-->
-        <!--<property name= "testOnBorrow" value="false"/>-->
-        <!--<property name= "testOnReturn" value="false"/>-->
-        <!--<property name= "validationQuery" value="select 1"/>-->
-        <!--<property name= "timeBetweenEvictionRunsMillis" value="60000"/>-->
-        <!--<property name= "numTestsPerEvictionRun" value="${maxActive}"/>-->
-    <!--</bean>-->
-    <!--创建数据源-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <!-- 数据库驱动 -->
-        <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <!-- 数据库连接 -->
-        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/flower?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=CTT"/>
-        <!-- 数据库用户名 -->
-        <property name="user" value="root"/>
-        <!-- 数据库密码 -->
-        <property name="password" value="951203"/>
     </bean>
+    <!--创建数据源-->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--&lt;!&ndash; 数据库驱动 &ndash;&gt;-->
+        <!--<property name="driverClass" value="com.mysql.jdbc.Driver" />-->
+        <!--&lt;!&ndash; 数据库连接 &ndash;&gt;-->
+        <!--<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/flower?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=CTT"/>-->
+        <!--&lt;!&ndash; 数据库用户名 &ndash;&gt;-->
+        <!--<property name="user" value="root"/>-->
+        <!--&lt;!&ndash; 数据库密码 &ndash;&gt;-->
+        <!--<property name="password" value="951203"/>-->
+    <!--</bean>-->
 
     <!-- 配置mybatis  -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

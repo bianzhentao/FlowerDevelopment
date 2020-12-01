@@ -64,7 +64,7 @@
 							<li><a href="#">趋势</a></li>
 							<li><a href="#">关于我们</a></li>
 							<li><a href="#">联系我们</a></li>
-							<li><a href="#">我的订单</a></li>
+							<li><a href="${pageContext.request.contextPath}/WEN-INF/jsp/orderList.jsp">我的订单</a></li>
 						</ul>
 					</div>
 				</div>

@@ -265,7 +265,7 @@
                                                                       href="${ pageContext.request.contextPath }/flower/findByPid?pid=${h.pid}">
                                             <!--下面这一句 设置了所有Product Title Here 属性 都会显示出自己的图片 不用一个一个设置了 -->
                                             <img alt="Product Title Here"
-                                                 src="${pageContext.request.contextPath}/${h.image}"> </a>
+                                                 src="${pageContext.request.contextPath}/images/uploadfiles/${h.image}"> </a>
 
                                             <div class="jtv-box-hover">
                                                 <ul class="add-to-links">
@@ -349,7 +349,7 @@
                                         <div class="item-img-info"><a class="product-image" title="Product Title Here"
                                                                       href="${ pageContext.request.contextPath }/flower/findByPid?pid=${n.pid}">
                                             <img alt="Product Title Here"
-                                                 src="${pageContext.request.contextPath}/${n.image}"></a>
+                                                 src="${pageContext.request.contextPath}/images/uploadfiles/${n.image}"></a>
                                             <div class="jtv-box-hover">
                                                 <ul class="add-to-links">
                                                     <li><a class="link-quickview"
