@@ -99,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="form-share">
-                                        <div class="sendtofriend-print"> <a href="javascript:print();"><i class="fa fa-print"></i> 打印本页</a> <a href="#"><i class="fa fa-envelope-o fa-fw"></i> 发送给朋友</a> </div>
+                                        <div class="sendtofriend-print"> <a href="javascript:print();"><i class="fa fa-print"></i> 打印本页</a> <%--<a href="#"><i class="fa fa-envelope-o fa-fw"></i> 发送给朋友</a>--%> </div>
                                     </div>
                                 </div>
                             </form>
